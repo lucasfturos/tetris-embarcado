@@ -1,6 +1,6 @@
 ## Metas do projeto
 
- - Desenvolvimento do Software
+**Desenvolvimento do Software**
 <details><summary>Mostrar detalhes</summary>
 
  - Estudar:
@@ -12,7 +12,7 @@
 
 </details>
 
- - Desenvolvimento do Hardware
+**Desenvolvimento do Hardware**
 <details><summary>Mostrar detalhes</summary>
 
  - Estudar:
@@ -23,7 +23,7 @@
 
 </details>
 
- - Documentação
+**Documentação**
 
 <details><summary>Mostrar detalhes</summary>
 
