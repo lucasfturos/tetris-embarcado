@@ -4,11 +4,13 @@
 <details><summary>Mostrar detalhes</summary>
 
  - Estudar:
+
   - Coletar informações de como fazer os desenhos no display;
 
  - Desenvolver:
 
- - Simulação
+  - Usar o simulador Wokwi para desenvolver o código; 
+    - Obs: Necessário para esse passo: Desenvolvimento de Hardware, seção Simular, primeiro tópico;
 
 </details>
 
@@ -16,9 +18,11 @@
 <details><summary>Mostrar detalhes</summary>
 
  - Estudar:
-  - Como desenvolver a E/S para o usuário;
+  - Como desenvolver a E/S para o usuário.
  - Projetar:
+  - Criar o diagrama do circuito.
  - Simular:
+  - Usar o diagrama do circuito para montar no simulador o Wokwi;
  - Montar:
 
 </details>
