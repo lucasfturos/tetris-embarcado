@@ -1,5 +1,5 @@
-#include "lib/Adafruit_GFX.h"
-#include "lib/Adafruit_SSD1306.h"
+#include <Adafruit_SSD1306.h>
+#include <Adafruit_GFX.h>
 
 #define OLED_RESET 4 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(OLED_RESET);
