@@ -9,10 +9,16 @@ Adafruit_SSD1306 display(OLED_RESET);
 void setup() {
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // Initialize the OLED display
   display.clearDisplay();
+  uint8_t color = 1;
+  for (int16_t i = 0; i < display.height() / 2; i += 3) {
+    // alternate colors
+    display.fillRect(i, i, display.width() - 2, display.height() - 2, color % 2);
+    display.display();
+    color++;
+  }
 }
 
 void loop() {
-  logo();
 }
 
 void logo() {

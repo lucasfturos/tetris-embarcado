@@ -2,25 +2,21 @@
 
 #include <avr/pgmspace.h>
 
-constexpr uint8_t squares{4};
-constexpr uint8_t shapes{7};
+uint8_t lines, cols;
+
+constexpr uint8_t squares{ 4 };
+constexpr uint8_t shapes{ 7 };
 
 constexpr uint8_t forms[shapes][squares] PROGMEM = {
-  { 0B01000100, 0B01000100 },
-  { 0B11000000, 0B01000100 },
-  { 0B01100000, 0B01000100 },
-  { 0B01100000, 0B00000110 },
-  { 0B11000000, 0B00000110 },
-  { 0B01000000, 0B00001110 },
-  { 0B01100000, 0B00001100 }
-};
-
-struct form_shapes {
-  uint8_t form[squares][squares];
-  uint8_t lines;
-  uint8_t cols;
+  { 1, 3, 5, 7 },  // I
+  { 2, 4, 5, 7 },  // Z
+  { 3, 5, 4, 6 },  // S
+  { 3, 5, 4, 7 },  // T
+  { 2, 3, 5, 7 },  // L
+  { 3, 5, 7, 6 },  // J
+  { 2, 3, 4, 5 },  // O
 };
 
 struct Point {
   uint8_t x, y;
-};
+} z[squares], k[squares];
