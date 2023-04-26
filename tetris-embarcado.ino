@@ -1,19 +1,26 @@
+#include "constante.hpp"
+#include "formas.hpp"
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 
-#define OLED_RESET 4 // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_RESET 4  
 Adafruit_SSD1306 display(OLED_RESET);
 
 void setup() {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // Initialize the OLED display
-  display.clearDisplay(); // Clear the display buffer
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // Initialize the OLED display
+  display.clearDisplay();
 }
 
 void loop() {
-  display.clearDisplay(); // Clear the display buffer
-  display.setTextSize(1); // Set the text size
-  display.setTextColor(WHITE); // Set the text color
-  display.setCursor(0, 0); // Set the text position
-  display.println("Muito Lindo!"); // Display the text
-  display.display(); // Show the text on the OLED display
+  logo();
+}
+
+void logo() {
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 0);
+  display.println("TETRIS EMBARCADO");
+  display.println("By. Lucas Turos");
+  display.display();
 }
