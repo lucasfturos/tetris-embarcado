@@ -6,23 +6,21 @@
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 
-// Display
-constexpr uint8_t SCREEN_WIDTH{ 128 };
-constexpr uint8_t SCREEN_HEIGHT{ 64 };
-constexpr uint8_t OLED_RESET {4};
+const uint8_t lines{ 128 }, cols{ 64 };
+const uint8_t OLED_RESET{ -1 };
 
 // Botões
-constexpr uint8_t KEY_ROTATE{};
-constexpr uint8_t KEY_LEFT{};
-constexpr uint8_t KEY_RIGHT{};
-constexpr uint8_t KEY_DASH{};
-constexpr uint8_t KEY_START{};
-constexpr uint8_t KEY_RESET{ 3 };
+const uint8_t KEY_ROTATE{};
+const uint8_t KEY_LEFT{};
+const uint8_t KEY_RIGHT{};
+const uint8_t KEY_DASH{};
+const uint8_t KEY_START{};
+const uint8_t KEY_RESET{ 3 };
 
 // Setup Tetris
-constexpr uint8_t squares{ 4 };
-constexpr uint8_t shapes{ 7 };
-constexpr uint8_t forms[shapes][squares] PROGMEM = {
+const uint8_t squares{ 4 };
+const uint8_t shapes{ 7 };
+const uint8_t forms[shapes][squares] PROGMEM = {
   { 1, 3, 5, 7 },  // I
   { 2, 4, 5, 7 },  // Z
   { 3, 5, 4, 6 },  // S

@@ -4,15 +4,15 @@
 
 class TetrisEmbarcado {
 private:
-  struct Point {
-    uint8_t x, y;
-  } z[squares], k[squares];
-
-  uint8_t lines, cols;
-  uint8_t diry, score;
+  uint8_t dirx, score;
   bool rotate, gameover;
   float timercount;
 
+  Adafruit_SSD1306 display;
+
+  struct Point {
+    uint8_t x, y;
+  } z[squares], k[squares];
 
 protected:
   void events();
@@ -24,8 +24,9 @@ protected:
   void setScore();
   void clear();
   void draw();
+  void logo();
 
 public:
-  TetrisEmbarcado(uint8_t, uint8_t, Adafruit_SSD1306);
+  TetrisEmbarcado();
   void run();
 };
