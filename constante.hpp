@@ -12,12 +12,11 @@ const uint8_t lines{128}, cols{64};
 const uint8_t OLED_RESET{-1};
 
 // Botões
-const uint8_t KEY_ROTATE{};
-const uint8_t KEY_LEFT{};
-const uint8_t KEY_RIGHT{};
-const uint8_t KEY_DASH{};
-const uint8_t KEY_START{};
-const uint8_t KEY_RESET{3};
+const uint8_t KEY_START{2};
+const uint8_t KEY_DASH{3};
+const uint8_t KEY_RIGHT{4};
+const uint8_t KEY_ROTATE{5};
+const uint8_t KEY_LEFT{6};
 
 // Setup Tetris
 const uint8_t squares{4};

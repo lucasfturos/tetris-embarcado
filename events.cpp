@@ -1,6 +1,6 @@
 #include "tetris.hpp"
 
-void TetrisEmbarcado::events() {}
+void TetrisEmbarcado::events() { pinMode(KEY_START, INPUT_PULLUP); }
 
 void TetrisEmbarcado::moveToDown() {}
 

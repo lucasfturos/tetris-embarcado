@@ -10,4 +10,7 @@ void TetrisEmbarcado::resetValues() {}
 
 void TetrisEmbarcado::setScore() {}
 
-void TetrisEmbarcado::run() { logo(); }
+void TetrisEmbarcado::run() {
+    logo();
+    events();
+}
