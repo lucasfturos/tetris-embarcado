@@ -6,7 +6,8 @@
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 
-const uint8_t lines{ 128 }, cols{ 64 };
+// Display
+const uint8_t lines{ 128 }, cols{ 32 };
 const uint8_t OLED_RESET{ -1 };
 
 // Botões
