@@ -13,4 +13,6 @@ void TetrisEmbarcado::setup() {
 
 void TetrisEmbarcado::loop() {
   events();
+  setRotate();
+  moveToDown();
 }

@@ -18,15 +18,30 @@ void TetrisEmbarcado::events() {
     draw();
   } else if (stateButtonStart == HIGH) {
     logo();
+    digitalWrite(13, LOW);
   }
 
-  
-  
-
+  if (stateButtonLeft == LOW) {
+    flags = 1;
+  } else if (stateButtonRight == LOW) {
+    flags = 2;
+  } else if (stateButtonDash == LOW) {
+    flags = 3;
+  } else if (stateButtonRotate == LOW) {
+    flags = 4;
+  }
 }
 
-void TetrisEmbarcado::moveToDown() {}
+void TetrisEmbarcado::moveToDown() {
+  if (flags == 3) {
+    digitalWrite(13, HIGH);
+  }
+}
 
-void TetrisEmbarcado::setRotate() {}
+void TetrisEmbarcado::setRotate() {
+  if (flags == 4) {
+    digitalWrite(13, HIGH);
+  }
+}
 
 void TetrisEmbarcado::changePosition() {}
