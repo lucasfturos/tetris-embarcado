@@ -1,9 +1,11 @@
 #include "tetris.hpp"
 
+TetrisEmbarcado tetris;
+
 void setup() {
-    auto tetris = TetrisEmbarcado();
-    tetris.run();
+  tetris.setup();
 }
 
 void loop() {
+  tetris.loop();
 }
