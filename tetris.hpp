@@ -4,7 +4,7 @@
 
 class TetrisEmbarcado {
   private:
-    uint8_t diry, score, flags;
+    uint8_t dirx, score, flags;
     bool rotate, gameover;
     float timercount;
 
@@ -15,14 +15,16 @@ class TetrisEmbarcado {
     } z[squares], k[squares];
 
   protected:
-    void events();
+    uint8_t events();
+
+    void logicMenu();
     void moveToDown();
     void setRotate();
     void resetValues();
     void changePosition();
     bool maxLimit();
     void setScore();
-    void clear();
+    void draw_ui();
     void draw();
     void logo();
 
