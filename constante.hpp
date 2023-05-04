@@ -29,3 +29,8 @@ const uint8_t forms[shapes][squares] = {
   { 3, 5, 7, 6 },  // J
   { 2, 3, 4, 5 },  // O
 };
+
+// 'Bloco', 5x5px
+const unsigned char bitmap_Bloco [] PROGMEM = {
+	0xf8, 0xf8, 0xf8, 0xf8, 0xf8
+};

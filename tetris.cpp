@@ -14,15 +14,15 @@ void TetrisEmbarcado::setup() {
 }
 
 void TetrisEmbarcado::loop() {
-  // int number = rand() % shapes;
-  // for (auto i{ 0 }; i < squares; ++i) {
-  //   z[i].x = forms[number][i] % 2;
-  //   z[i].y = forms[number][i] / 2;
-  // }
+  int number = rand() % shapes;
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    z[i].x = forms[number][i] % 2;
+    z[i].y = forms[number][i] / 2;
+  }
   logicMenu();
   changePosition();
   moveToDown();
   resetValues();
 
-  // setRotate();
+  setRotate();
 }

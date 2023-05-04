@@ -25,7 +25,8 @@ uint8_t TetrisEmbarcado::events() {
   }
   if (stateButtonRight == HIGH) {
     return flags = 4;
-  }  if (stateButtonDash == LOW) {
+  }
+  if (stateButtonDash == LOW) {
     return flags = 5;
   }
   if (stateButtonRotate == LOW) {
@@ -65,14 +66,14 @@ void TetrisEmbarcado::moveToDown() {
     digitalWrite(13, HIGH);
     digitalWrite(13, LOW);
   }
-  for (auto i{ 0 }; i < squares; ++i) {
-    //k[i] = z[i];
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    k[i] = z[i];
     z[i].y += 2;
   }
 
   if (maxLimit()) {
     int number = rand() % shapes;
-    for (auto i{ 0 }; i < squares; ++i) {
+    for (uint8_t i{ 0 }; i < squares; ++i) {
       z[i].x = forms[number][i] % 2;
       z[i].y = forms[number][i] / 2;
     }
@@ -83,7 +84,7 @@ void TetrisEmbarcado::setRotate() {
   if (flags == 6) {
     digitalWrite(13, HIGH);
     Point p = z[1];
-    for (auto i{ 0 }; i < squares; ++i) {
+    for (uint8_t i{ 0 }; i < squares; ++i) {
       int x = z[i].y - p.y;
       int y = z[i].x - p.x;
 
@@ -92,7 +93,7 @@ void TetrisEmbarcado::setRotate() {
     }
 
     if (maxLimit()) {
-      for (auto i{ 0 }; i < squares; ++i) {
+      for (uint8_t i{ 0 }; i < squares; ++i) {
         z[i] = k[i];
       }
     }
@@ -103,13 +104,13 @@ void TetrisEmbarcado::changePosition() {
   if (flags == 3 || flags == 4) {
     digitalWrite(13, HIGH);
     digitalWrite(13, LOW);
-    for (auto i{0}; i < squares; ++i) {
+    for (uint8_t i{ 0 }; i < squares; ++i) {
       k[i] = z[i];
       z[i].x += dirx;
     }
 
     if (maxLimit()) {
-      for (auto i{0}; i < squares; ++i) {
+      for (uint8_t i{ 0 }; i < squares; ++i) {
         z[i] = k[i];
       }
     }
