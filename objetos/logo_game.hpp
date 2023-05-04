@@ -1,4 +1,6 @@
-#include "tetris.hpp"
+#pragma once
+
+#include <avr/pgmspace.h>
 
 // 'logo_tela_inicial', 64x128px
 const unsigned char bitmap_logo_tela_inicial[] PROGMEM = {
@@ -89,10 +91,3 @@ const unsigned char bitmap_logo_tela_inicial[] PROGMEM = {
   0x01, 0xe7, 0xf9, 0xf0, 0x00, 0x00, 0x42, 0x1e, 0x13, 0xe7, 0xfb, 0xf0,
   0x00, 0x00, 0x03, 0xfe
 };
-
-void TetrisEmbarcado::logo() {
-    display.clearDisplay();
-    display.setRotation(3);
-    display.drawBitmap(0, 0, bitmap_logo_tela_inicial, cols, lines, 1);
-    display.display();
-}

@@ -4,7 +4,8 @@
 
 class TetrisEmbarcado {
   private:
-    uint8_t dirx, score, flags;
+    // Limite do score é 255
+    uint8_t dirx, score{0}, flags; 
     bool rotate, gameover;
     float timercount;
 

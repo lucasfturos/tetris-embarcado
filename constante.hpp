@@ -30,6 +30,9 @@ const uint8_t forms[shapes][squares] = {
   { 2, 3, 4, 5 },  // O
 };
 
+// Objetos do jogo
+#include "./objetos/logo_game.hpp"
+#include "./objetos/borda_tabuleiro.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco [] PROGMEM = {
 	0xf8, 0xf8, 0xf8, 0xf8, 0xf8

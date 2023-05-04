@@ -71,13 +71,13 @@ void TetrisEmbarcado::moveToDown() {
     z[i].y += 2;
   }
 
-  if (maxLimit()) {
-    int number = rand() % shapes;
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      z[i].x = forms[number][i] % 2;
-      z[i].y = forms[number][i] / 2;
-    }
-  }
+  // if (maxLimit()) {
+  //   uint8_t number = rand() % shapes;
+  //   for (uint8_t i{ 0 }; i < squares; ++i) {
+  //     z[i].x = forms[number][i] % 2;
+  //     z[i].y = forms[number][i] / 2;
+  //   }
+  // }
 }
 
 void TetrisEmbarcado::setRotate() {
@@ -102,6 +102,7 @@ void TetrisEmbarcado::setRotate() {
 
 void TetrisEmbarcado::changePosition() {
   if (flags == 3 || flags == 4) {
+    draw();
     digitalWrite(13, HIGH);
     digitalWrite(13, LOW);
     for (uint8_t i{ 0 }; i < squares; ++i) {
