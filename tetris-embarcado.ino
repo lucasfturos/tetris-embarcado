@@ -3,9 +3,9 @@
 TetrisEmbarcado tetris;
 
 void setup() {
-  tetris.setup();
+    tetris.setup();
 }
 
 void loop() {
-  tetris.loop();
+    tetris.loop();
 }
