@@ -6,6 +6,8 @@
 class TetrisEmbarcado {
 private:
   // Declaração de variáveis privadas.
+  // Dimenções do tabuleiro
+  uint8_t lines{ 125 }, cols{ 62 };
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255
   uint8_t score{ 0 };      // Variável da pontuação do jogo.
@@ -50,7 +52,8 @@ protected:
   bool maxLimit();
   void setScore();
   void draw_ui();
-  void draw();
+  void draw_gameover();
+  void draw_game();
   void logo();
 
 public:

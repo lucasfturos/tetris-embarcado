@@ -7,7 +7,7 @@
 #include <Adafruit_SSD1306.h>
 
 // Display
-const uint8_t lines{ 128 }, cols{ 64 };
+const uint8_t width{ 128 }, height{ 64 };
 const uint8_t OLED_RESET{ -1 };
 
 // Botões
@@ -18,8 +18,9 @@ const uint8_t KEY_RIGHT{ 5 };
 const uint8_t KEY_DASH{ 6 };
 const uint8_t KEY_ROTATE{ 7 };
 
-// Objetos do jogo
-#include "./ui/borda_tabuleiro.hpp"
+// Interface gráfica do jogo
 #include "./ui/logo_game.hpp"
+#include "./ui/game_over.hpp"
+#include "./ui/borda_tabuleiro.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco[] PROGMEM = { 0xf8, 0xf8, 0xf8, 0xf8, 0xf8 };
