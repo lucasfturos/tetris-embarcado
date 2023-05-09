@@ -1,4 +1,3 @@
-#include "constante.hpp"
 #include "tetris.hpp"
 
 // Função que desenha a interface do jogo
@@ -14,13 +13,15 @@ void TetrisEmbarcado::draw_ui() {
 
 // Função que desenha as peças do jogo
 void TetrisEmbarcado::draw_game() {
-  int i = 0;
   display.setRotation(3);
-  display.drawBitmap(cols / 2, lines / 2, bitmap_Bloco, 5, 5, 1);
-  display.drawBitmap(cols / 2.5, lines / 2, bitmap_Bloco, 5, 5, 1);
-  display.drawBitmap(cols / 3.5, lines / 2, bitmap_Bloco, 5, 5, 1);
-  display.drawBitmap(cols / 2, lines / 2.3, bitmap_Bloco, 5, 5, 1);
-
+  uint8_t number = rand() % shapes;
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    z[i].x = forms[number][i] % 2;
+    z[i].y = forms[number][i] / 2;
+  }
+  for (uint8_t i{ 0 }; i < squares; i++) {
+    display.drawBitmap(z[i].x, z[i].y, bitmap_Bloco, 5, 5, 1);
+  }
   //draw_ui();
   display.display();
 }

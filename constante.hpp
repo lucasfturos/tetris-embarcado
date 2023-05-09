@@ -27,13 +27,20 @@ const uint8_t shapes{ 7 };
 #include "ui/game_over.hpp"
 #include "ui/borda_tabuleiro.hpp"
 // 'Bloco', 5x5px
-const unsigned char bitmap_Bloco[] PROGMEM = { 0xf8, 0xf8, 0xf8, 0xf8, 0xf8 };
-const uint8_t forms[shapes][squares] = {
-  { 1, 3, 5, 7 },  // I
-  { 2, 4, 5, 7 },  // Z
-  { 3, 5, 4, 6 },  // S
-  { 3, 5, 4, 7 },  // T
-  { 2, 3, 5, 7 },  // L
-  { 3, 5, 7, 6 },  // J
-  { 2, 3, 4, 5 },  // O
+const unsigned char bitmap_Bloco[] PROGMEM = { 248, 248, 248, 248, 248 };
+//   { 1, 3, 5, 7 },  // I
+//   { 2, 4, 5, 7 },  // Z
+//   { 3, 5, 4, 6 },  // S
+//   { 3, 5, 4, 7 },  // T
+//   { 2, 3, 5, 7 },  // L
+//   { 3, 5, 7, 6 },  // J
+//   { 2, 3, 4, 5 },  // O
+const unsigned char forms[][squares] = {
+  { 0B100000, 0B110000, 0B101000, 0B111000 },  // I
+  { 0B010000, 0B001000, 0B101000, 0B111000 },  // Z
+  { 0B110000, 0B101000, 0B100000, 0B011000 },  // S
+  { 0B110000, 0B101000, 0B100000, 0B111000 },  // T
+  { 0B010000, 0B110000, 0B101000, 0B111000 },  // L
+  { 0B110000, 0B101000, 0B111000, 0B011000 },  // J
+  { 0B010000, 0B110000, 0B100000, 0B101000 },  // O
 };
