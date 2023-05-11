@@ -14,10 +14,9 @@ void TetrisEmbarcado::draw_ui() {
 // Função que desenha as peças do jogo
 void TetrisEmbarcado::draw_game() {
   display.setRotation(3);
-  uint8_t number = rand() % shapes;
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    z[i].x = forms[number][i] % 2;
-    z[i].y = forms[number][i] / 2;
+    z[i].x = forms[5][i] % 2;
+    z[i].y = forms[5][i]/ 2;
   }
   for (uint8_t i{ 0 }; i < squares; i++) {
     display.drawBitmap(z[i].x, z[i].y, bitmap_Bloco, 5, 5, 1);

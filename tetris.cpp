@@ -25,7 +25,7 @@ void TetrisEmbarcado::loop() {
     // logicMenu();
     // if (!gameover) {
     //   changePosition();
-    moveToDown();
+    //moveToDown();
     //   resetValues();
     //   setRotate();
     //   setScore();

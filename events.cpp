@@ -89,13 +89,13 @@ void TetrisEmbarcado::moveToDown() {
     z[i].y += 2;
   }
 
-  if (maxLimit()) {
-    uint8_t number = rand() % shapes;
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      z[i].x = forms[number][i] % 2;
-      z[i].y = forms[number][i] / 2;
-    }
-  }
+  // if (maxLimit()) {
+  //   uint8_t number = rand() % shapes;
+  //   for (uint8_t i{ 0 }; i < squares; ++i) {
+  //     z[i].x = forms[number][i] % 2;
+  //     z[i].y = forms[number][i] / 2;
+  //   }
+  // }
 }
 
 // Função que gira a peça
