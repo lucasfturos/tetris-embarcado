@@ -15,8 +15,8 @@ void TetrisEmbarcado::draw_ui() {
 void TetrisEmbarcado::draw_game() {
   display.setRotation(3);
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    z[i].x = forms[5][i] % 2;
-    z[i].y = forms[5][i]/ 2;
+    z[i].x = forms[6][i] % 2;
+    z[i].y = forms[6][i] / 2;
   }
   for (uint8_t i{ 0 }; i < squares; i++) {
     display.drawBitmap(z[i].x, z[i].y, bitmap_Bloco, 5, 5, 1);
