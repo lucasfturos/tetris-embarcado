@@ -28,20 +28,3 @@ const uint8_t shapes{ 7 };
 #include "ui/borda_tabuleiro.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco[] PROGMEM = { 248, 248, 248, 248, 248 };
-
-/*
-Configuração das formas
- 0 1
- 2 3
- 4 5
- 6 7
-*/
-const uint8_t forms[][squares] = {
-  { 1 * 6, 3 * 6, 5 * 6, 7 * 6 },    // I
-  { 2 * 1, 4 * 1, 5 * 1, 7 * 1 },    // Z
-  { 3 * 6, 5 * 5, 4 * 6, 6 * 5 },    // S
-  { 3 * 6, 5 * 6, 7 * 6, 4 },        // T
-  { 2, 3 * 6, 5 * 6, 7 * 2 },        // L
-  { 3 * 6, 5 * 6, 7 * 6, 6 * 12 },   // J
-  { 2 * 6, 4 * 6, 3 + 12, 5 + 12 },  // O
-};
