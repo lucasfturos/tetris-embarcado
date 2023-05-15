@@ -45,11 +45,10 @@ void TetrisEmbarcado::logicMenu() {
       display.clearDisplay();
       digitalWrite(13, HIGH);
       draw_game();
-      // if (score == 10) {
-      //   draw_gameover();
-      //   digitalWrite(13, LOW);
-      //   exit(0);
-      // }
+      if (score == 10) {
+        draw_gameover();
+        digitalWrite(13, LOW);
+      }
       break;
     case 2:
       display.clearDisplay();
@@ -71,8 +70,6 @@ void TetrisEmbarcado::logicMenu() {
       break;
     case 6:
       rotate = true;
-    default:
-      digitalWrite(13, LOW);
       break;
   }
 }
@@ -86,7 +83,7 @@ void TetrisEmbarcado::moveToDown() {
   }
   for (uint8_t i{ 0 }; i < squares; ++i) {
     k[i] = z[i];
-    z[i].y += 2;
+    z[i].x += 2;
   }
 
   if (maxLimit()) {

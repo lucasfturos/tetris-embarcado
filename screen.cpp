@@ -14,7 +14,11 @@ void TetrisEmbarcado::draw_ui() {
 // Função que desenha as peças do jogo
 void TetrisEmbarcado::draw_game() {
   display.setRotation(3);
-  
+  uint8_t number = rand() % shapes;
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    z[i].x = forms[1][i] % 2;
+    z[i].y = forms[1][i] / 2;
+  }
   for (uint8_t i{ 0 }; i < lines; ++i) {
     for (uint8_t j{ 0 }; j < cols; ++j) {
       for (uint8_t k{ 0 }; k < squares; ++k) {
@@ -22,6 +26,13 @@ void TetrisEmbarcado::draw_game() {
           display.drawBitmap(4 + i, 9 + j, bitmap_Bloco, 4, 4, 1);
         }
       }
+    }
+  }
+  for (uint8_t k{ 0 }; k < squares; ++k) {
+    ++z[k].x;
+    if (maxLimit()) {
+      z[k].x = forms[number][k] % 2;
+      z[k].y = forms[number][k] / 2;
     }
   }
   draw_ui();
@@ -55,7 +66,7 @@ void TetrisEmbarcado::setScore() {
 // Função que define os limites do tabuleiro
 bool TetrisEmbarcado::maxLimit() {
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    if (z[i].x < 4 || z[i].x >= lines || z[i].y >= cols || z[i].y < 9) {
+    if (z[i].x < 1 || z[i].y < 1 || z[i].x >= lines || z[i].y >= cols) {
       return true;
     }
   }

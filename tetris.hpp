@@ -7,7 +7,7 @@ class TetrisEmbarcado {
 private:
   // Declaração de variáveis privadas.
   // Dimenções do tabuleiro
-  uint8_t lines{ 115 }, cols{ 54 };
+  uint8_t lines{ 111 }, cols{ 50 };
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255
   uint8_t score{ 0 };      // Variável da pontuação do jogo.
@@ -31,6 +31,7 @@ private:
   2 3
   4 5
   6 7
+
   |-----------------------------------------------------|
   |    1|       |       |       |       |       |       |
   |I = 3|Z = 2  |S =   3|T =   3|L = 2 3|J =   3|O = 2 3|
@@ -39,7 +40,7 @@ private:
   |-----------------------------------------------------|
   */
 
-  const uint8_t forms[shapes][squares] = {
+  uint8_t forms[shapes][squares] = {
     { 1 * 5, 3 * 5, 5 * 5, 7 * 5 },  // I
     { 2 * 5, 4 * 5, 5 * 5, 7 * 5 },  // Z
     { 3 * 5, 5 * 5, 4 * 5, 6 * 5 },  // S
