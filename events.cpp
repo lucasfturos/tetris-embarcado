@@ -43,17 +43,18 @@ void TetrisEmbarcado::logicMenu() {
   switch (events()) {
     case 1:
       display.clearDisplay();
-      digitalWrite(13, HIGH);
       draw_game();
-      if (score == 10) {
+      if (score > 254) {
+        display.clearDisplay();
         draw_gameover();
+        gameover = true;
         digitalWrite(13, LOW);
       }
       break;
     case 2:
       display.clearDisplay();
-      logo();
       digitalWrite(13, LOW);
+      logo();
       break;
     case 3:
       digitalWrite(13, HIGH);
@@ -83,7 +84,7 @@ void TetrisEmbarcado::moveToDown() {
   }
   for (uint8_t i{ 0 }; i < squares; ++i) {
     k[i] = z[i];
-    z[i].x += 2;
+    z[i].y += 2;
   }
 
   if (maxLimit()) {
@@ -119,7 +120,6 @@ void TetrisEmbarcado::setRotate() {
 // Função que move a peça para a esqueda ou direita
 void TetrisEmbarcado::changePosition() {
   if (flags == 3 || flags == 4) {
-    draw_game();
     digitalWrite(13, LOW);
     for (uint8_t i{ 0 }; i < squares; ++i) {
       k[i] = z[i];
@@ -132,4 +132,11 @@ void TetrisEmbarcado::changePosition() {
       }
     }
   }
+}
+
+
+// Função que redefine os valores.
+void TetrisEmbarcado::resetValues() {
+  dirx = flags = 0;
+  rotate = false;
 }
