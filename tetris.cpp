@@ -2,11 +2,7 @@
 
 // Chamada do constructor da classe
 TetrisEmbarcado::TetrisEmbarcado() {
-  uint8_t number = rand() % shapes;
-  for (uint8_t i = 0; i < squares; ++i) {
-    z[i].x = (cols - 3) / 2 + forms[number][i] % 2;
-    z[i].y = forms[number][i] / 2;
-  }
+  generatePiece();
 }
 
 // Chamada do destructor

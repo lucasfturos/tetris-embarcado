@@ -56,7 +56,6 @@ private:
 
 protected:
   // Declaração das funções protegidas.
-  uint8_t events();
 
   // Eventos do jogo
   void logicMenu();
@@ -68,6 +67,8 @@ protected:
   void generatePiece();
   void gameOver();
   void checkLines();
+
+  uint8_t events();
   // Interface do jogo
   void setScore();
   void draw_ui();

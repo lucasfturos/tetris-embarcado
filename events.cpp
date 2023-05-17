@@ -67,7 +67,6 @@ void TetrisEmbarcado::logicMenu() {
   }
 }
 
-
 // Função que redefine os valores.
 void TetrisEmbarcado::resetValues() {
   dirx = 0;
@@ -79,4 +78,9 @@ void TetrisEmbarcado::gameOver() {
   draw_gameover();
   gameover = true;
   digitalWrite(13, LOW);
+}
+
+// Função que calcula os pontos do jogador.
+void TetrisEmbarcado::setScore() {
+  // score++;
 }
