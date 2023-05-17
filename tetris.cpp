@@ -33,12 +33,12 @@ void TetrisEmbarcado::setup() {
 void TetrisEmbarcado::loop() {
   // while (!gameover) {
   draw_game();
-  // logicMenu();
+  logicMenu();
   // if (!gameover) {
   //   changePosition();
   moveToDown();
-  //   resetValues();
-  //   setRotate();
+  resetValues();
+  setRotate();
   //   setScore();
   // }
   // }

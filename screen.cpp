@@ -32,7 +32,6 @@ void TetrisEmbarcado::draw_game() {
     uint8_t j = z[k].y;
     display.drawBitmap(4 + i * 5, j * 5, bitmap_Bloco, 4, 4, 1);
   }
-
   draw_ui();
   // setScore();
 }

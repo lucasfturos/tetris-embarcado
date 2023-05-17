@@ -9,41 +9,36 @@ uint8_t TetrisEmbarcado::events() {
   pinMode(KEY_RIGHT, INPUT);
   pinMode(KEY_DASH, INPUT_PULLUP);
   pinMode(KEY_ROTATE, INPUT_PULLUP);
-  // Variáveis do estado dos botões
-  uint8_t stateButtonStart = digitalRead(KEY_START);
-  uint8_t stateButtonRestart = digitalRead(KEY_RESTART);
-  uint8_t stateButtonLeft = digitalRead(KEY_LEFT);
-  uint8_t stateButtonRight = digitalRead(KEY_RIGHT);
-  uint8_t stateButtonDash = digitalRead(KEY_DASH);
-  uint8_t stateButtonRotate = digitalRead(KEY_ROTATE);
+
+  uint8_t flags = 0;  // Variável que pega os eventos do teclado.
 
   // Condição que pega o estado do botões e define na variável flags
-  if (stateButtonStart == HIGH) {
+  if (digitalRead(KEY_START) == HIGH) {
     return flags = 1;
   }
-  if (stateButtonRestart == HIGH) {
+  if (digitalRead(KEY_RESTART) == HIGH) {
     return flags = 2;
   }
-  if (stateButtonLeft == HIGH) {
+  if (digitalRead(KEY_LEFT) == HIGH) {
     return flags = 3;
   }
-  if (stateButtonRight == HIGH) {
+  if (digitalRead(KEY_RIGHT) == HIGH) {
     return flags = 4;
   }
-  if (stateButtonDash == HIGH) {
+  if (digitalRead(KEY_DASH) == HIGH) {
     return flags = 5;
   }
-  if (stateButtonRotate == HIGH) {
+  if (digitalRead(KEY_ROTATE) == HIGH) {
     return flags = 6;
   }
+  return flags;
 }
 
 // Função que define as ações do jogo
 void TetrisEmbarcado::logicMenu() {
-  switch (events()) {
+  uint8_t event = events();
+  switch (event) {
     case 1:
-      display.clearDisplay();
-      draw_game();
       if (score > 254) {
         display.clearDisplay();
         draw_gameover();
@@ -77,14 +72,17 @@ void TetrisEmbarcado::logicMenu() {
 
 // Função que move a peça para baixo mais rápido
 void TetrisEmbarcado::moveToDown() {
+  uint8_t flags = events();  // Variável que pega os eventos do teclado.
   if (flags == 5) {
     for (auto i{ 0 }; i < squares; ++i) {
-      z[i].y += 2;
+      ++z[i].y;
+      delay(50);
     }
   }
   for (uint8_t i{ 0 }; i < squares; ++i) {
     k[i] = z[i];
     ++z[i].y;
+    delay(90);
   }
 
   if (maxLimit()) {
@@ -114,11 +112,14 @@ void TetrisEmbarcado::setRotate() {
         z[i] = k[i];
       }
     }
+    rotate = false;
   }
 }
 
 // Função que move a peça para a esqueda ou direita
 void TetrisEmbarcado::changePosition() {
+  uint8_t flags = events();  // Variável que pega os eventos do teclado.
+
   if (flags == 3 || flags == 4) {
     digitalWrite(13, LOW);
     for (uint8_t i{ 0 }; i < squares; ++i) {
@@ -134,9 +135,7 @@ void TetrisEmbarcado::changePosition() {
   }
 }
 
-
 // Função que redefine os valores.
 void TetrisEmbarcado::resetValues() {
-  dirx = flags = 0;
-  rotate = false;
+  dirx = 0;
 }
