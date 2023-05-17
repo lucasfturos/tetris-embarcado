@@ -40,10 +40,7 @@ void TetrisEmbarcado::logicMenu() {
   switch (event) {
     case 1:
       if (score > 254) {
-        display.clearDisplay();
-        draw_gameover();
-        gameover = true;
-        digitalWrite(13, LOW);
+        gameOver();
       }
       break;
     case 2:
@@ -70,72 +67,16 @@ void TetrisEmbarcado::logicMenu() {
   }
 }
 
-// Função que move a peça para baixo mais rápido
-void TetrisEmbarcado::moveToDown() {
-  uint8_t flags = events();  // Variável que pega os eventos do teclado.
-  if (flags == 5) {
-    for (auto i{ 0 }; i < squares; ++i) {
-      ++z[i].y;
-      delay(50);
-    }
-  }
-  for (uint8_t i{ 0 }; i < squares; ++i) {
-    k[i] = z[i];
-    ++z[i].y;
-    delay(90);
-  }
-
-  if (maxLimit()) {
-    uint8_t number = rand() % shapes;
-    for (uint8_t i = 0; i < squares; ++i) {
-      z[i].x = (cols - 3) / 2 + forms[number][i] % 2;
-      z[i].y = forms[number][i] / 2;
-    }
-  }
-}
-
-// Função que gira a peça
-void TetrisEmbarcado::setRotate() {
-  if (rotate) {
-    digitalWrite(13, HIGH);
-    Point p = z[1];
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      int x = z[i].y - p.y;
-      int y = z[i].x - p.x;
-
-      z[i].x = p.x - x;
-      z[i].y = p.y + y;
-    }
-
-    if (maxLimit()) {
-      for (uint8_t i{ 0 }; i < squares; ++i) {
-        z[i] = k[i];
-      }
-    }
-    rotate = false;
-  }
-}
-
-// Função que move a peça para a esqueda ou direita
-void TetrisEmbarcado::changePosition() {
-  uint8_t flags = events();  // Variável que pega os eventos do teclado.
-
-  if (flags == 3 || flags == 4) {
-    digitalWrite(13, LOW);
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      k[i] = z[i];
-      z[i].x += dirx;
-    }
-
-    if (maxLimit()) {
-      for (uint8_t i{ 0 }; i < squares; ++i) {
-        z[i] = k[i];
-      }
-    }
-  }
-}
 
 // Função que redefine os valores.
 void TetrisEmbarcado::resetValues() {
   dirx = 0;
+  rotate = false;
+}
+
+void TetrisEmbarcado::gameOver() {
+  display.clearDisplay();
+  draw_gameover();
+  gameover = true;
+  digitalWrite(13, LOW);
 }

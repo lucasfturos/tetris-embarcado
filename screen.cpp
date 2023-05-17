@@ -2,8 +2,8 @@
 
 // Inicializar todos os campos do tabuleiro como vazios
 void TetrisEmbarcado::initBoard() {
-  for (uint8_t i = 0; i < lines; ++i) {
-    for (uint8_t j = 0; j < cols; ++j) {
+  for (uint8_t i {0}; i < lines; ++i) {
+    for (uint8_t j {0}; j < cols; ++j) {
       board[i][j] = false;
     }
   }
@@ -55,15 +55,9 @@ void TetrisEmbarcado::logo() {
   display.display();
 }
 
-// Função que calcula os pontos do jogador.
-void TetrisEmbarcado::setScore() {
-  // score++;
-}
-
 // Função que define os limites do tabuleiro
 bool TetrisEmbarcado::maxLimit() {
-  initBoard();
-  for (uint8_t i = 0; i < squares; ++i) {
+  for (uint8_t i {0}; i < squares; ++i) {
     if (z[i].x < 1 || z[i].y < 1 || z[i].x >= cols + 1 || z[i].y >= lines + 5 || board[z[i].x][z[i].y]) {
       return true;
     }
