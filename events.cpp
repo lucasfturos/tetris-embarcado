@@ -79,18 +79,18 @@ void TetrisEmbarcado::logicMenu() {
 void TetrisEmbarcado::moveToDown() {
   if (flags == 5) {
     for (auto i{ 0 }; i < squares; ++i) {
-      ++z[i].x;
+      z[i].y += 2;
     }
   }
   for (uint8_t i{ 0 }; i < squares; ++i) {
     k[i] = z[i];
-    z[i].y += 2;
+    ++z[i].y;
   }
 
   if (maxLimit()) {
     uint8_t number = rand() % shapes;
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      z[i].x = forms[number][i] % 2;
+    for (uint8_t i = 0; i < squares; ++i) {
+      z[i].x = (cols - 3) / 2 + forms[number][i] % 2;
       z[i].y = forms[number][i] / 2;
     }
   }

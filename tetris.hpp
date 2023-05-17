@@ -7,7 +7,10 @@ class TetrisEmbarcado {
 private:
   // Declaração de variáveis privadas.
   // Dimenções do tabuleiro
-  uint8_t lines{ 111 }, cols{ 50 };
+  static const uint8_t lines{ 20 }, cols{ 10 };
+  // Matriz tabuleiro
+  bool board[lines][cols];
+
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255
   uint8_t score{ 0 };      // Variável da pontuação do jogo.
@@ -41,13 +44,13 @@ private:
   */
 
   uint8_t forms[shapes][squares] = {
-    { 1 * 5, 3 * 5, 5 * 5, 7 * 5 },  // I
-    { 2 * 5, 4 * 5, 5 * 5, 7 * 5 },  // Z
-    { 3 * 5, 5 * 5, 4 * 5, 6 * 5 },  // S
-    { 3 * 5, 5 * 5, 7 * 5, 4 * 5 },  // T
-    { 2 * 5, 3 * 5, 5 * 5, 7 * 5 },  // L
-    { 3 * 5, 5 * 5, 7 * 5, 6 * 5 },  // J
-    { 2 * 5, 4 * 5, 3 * 5, 5 * 5 },  // O
+    { 1, 3, 5, 7 },  // I
+    { 2, 4, 5, 7 },  // Z
+    { 3, 5, 4, 6 },  // S
+    { 3, 5, 7, 4 },  // T
+    { 2, 3, 5, 7 },  // L
+    { 3, 5, 7, 6 },  // J
+    { 2, 4, 3, 5 },  // O
   };
 
 protected:
@@ -65,9 +68,13 @@ protected:
   void draw_gameover();
   void draw_game();
   void logo();
+  void initBoard();
 
 public:
   // Declaração das funções publicas.
+  TetrisEmbarcado();
+  ~TetrisEmbarcado();
+
   void setup();
   void loop();
 };
