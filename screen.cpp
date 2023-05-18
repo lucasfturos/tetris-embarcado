@@ -69,7 +69,7 @@ void TetrisEmbarcado::resetGame() {
     }
 
     // Reiniciar o jogo
-    generatePiece();
+    spawPiece();
 }
 
 // Função que define os limites do tabuleiro

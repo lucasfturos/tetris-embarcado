@@ -2,7 +2,8 @@
 
 // Chamada do constructor da classe
 TetrisEmbarcado::TetrisEmbarcado() {
-  generatePiece();
+  initBoard();
+  spawPiece();
 }
 
 // Chamada do destructor

@@ -63,7 +63,7 @@ protected:
   void resetValues();
   void changePosition();
   bool maxLimit();
-  void generatePiece();
+  void spawPiece();
   void gameOver();
   void checkLines();
   void removeLine(uint8_t line);

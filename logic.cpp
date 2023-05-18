@@ -6,34 +6,36 @@ void TetrisEmbarcado::moveToDown() {
 
   // Movimento normal das peças
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    k[i] = z[i];
+    //  k[i] = z[i];
     ++z[i].y;
     delay(50);
-  }
 
-  // Ao precionar o botão dash a peça move mais rápido
-  if (flags == 5) {
-    for (auto i{ 0 }; i < squares; ++i) {
+    // Ao precionar o botão dash a peça move mais rápido
+    if (flags == 5) {
+      digitalWrite(13, LOW);
       ++z[i].y;
-      delay(10);
+      delay(1);
     }
   }
 
   // Verifica se atingiu o limite máximo
   if (maxLimit()) {
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      --z[i].y;
-      board[z[i].x][z[i].y] = true;  // Marca as posições da peça atual no tabuleiro
+      board[z[i].x][z[i].y - 1] = true;
     }
+
+    // Verifica se houve algum preenchimento de linhas
+    checkLines();
+
     // Gera uma nova peça
-    generatePiece();
+    spawPiece();
   }
 }
 
 // Função que gira a peça
 void TetrisEmbarcado::setRotate() {
   if (rotate) {
-    digitalWrite(13, HIGH);
+    digitalWrite(13, LOW);
     Point p = z[1];
     for (uint8_t i{ 0 }; i < squares; ++i) {
       int x = z[i].y - p.y;
@@ -71,10 +73,10 @@ void TetrisEmbarcado::changePosition() {
 
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
-  for (uint8_t y = 0; y < lines; ++y) {
+  for (uint8_t y = 0; y < lines + 5; ++y) {
     bool lineComplete = true;
 
-    for (uint8_t x = 1; x <= cols; ++x) {
+    for (uint8_t x = 1; x <= cols + 1; ++x) {
       if (!board[x][y]) {
         lineComplete = false;
         break;
@@ -90,8 +92,8 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (uint8_t y = line; y > 0; --y) {
-    for (uint8_t x = 1; x <= cols; ++x) {
+  for (uint8_t y = line + 5; y > 0; --y) {
+    for (uint8_t x = 4; x <= cols + 1; ++x) {
       board[x][y] = board[x][y - 1];
     }
   }
@@ -102,16 +104,14 @@ void TetrisEmbarcado::removeLine(uint8_t line) {
 }
 
 // Função que gera novas peças
-void TetrisEmbarcado::generatePiece() {
-  uint8_t number = rand() % shapes;
+void TetrisEmbarcado::spawPiece() {
+  uint8_t number{ random(shapes) };
+  const uint8_t startX{ (cols - 3) / 2 };
+  const uint8_t startY{ 0 };
 
   // Defini as posições da nova peça no topo do tabuleiro
   for (uint8_t i = 0; i < squares; ++i) {
-    z[i].x = (cols - 3) / 2 + forms[number][i] % 2;
-    z[i].y = forms[number][i] / 2;
-  }
-  if (maxLimit()){
-  // Verifica se houve algum preenchimento completo de linhas
-    checkLines();
+    z[i].x = startX + forms[number][i] % 2;
+    z[i].y = startY + forms[number][i] / 2;
   }
 }

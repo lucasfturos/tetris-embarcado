@@ -59,18 +59,17 @@ void TetrisEmbarcado::logicMenu() {
       break;
     case 5:
       digitalWrite(13, HIGH);
-      delay(20);
-      digitalWrite(13, LOW);
       break;
     case 6:
+      digitalWrite(13, HIGH);
       rotate = true;
       break;
-  //   default:
-  //     digitalWrite(13, LOW);
-  //     logo();
-  //     startgame = false;
-  //     gameover = true;
-  //     break;
+      //   default:
+      //     digitalWrite(13, LOW);
+      //     logo();
+      //     startgame = false;
+      //     gameover = true;
+      //     break;
   }
 }
 
