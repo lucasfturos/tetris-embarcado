@@ -21,21 +21,10 @@ void TetrisEmbarcado::moveToDown() {
 
   // Verifica se atingiu o limite máximo
   if (maxLimit()) {
-    uint8_t number{ rand() % shapes };
-
-    // Reverte as alterações nas posições da peça atual
     for (uint8_t i{ 0 }; i < squares; ++i) {
       --z[i].y;
+      board[z[i].x][z[i].y] = true;  // Marca as posições da peça atual no tabuleiro
     }
-
-    // Marca as posições da peça atual no tabuleiro
-    for (uint8_t i{ 0 }; i < squares; ++i) {
-      board[z[i].x][z[i].y] = true;
-    }
-
-    // Verifica se houve algum preenchimento completo de linhas
-    checkLines();
-
     // Gera uma nova peça
     generatePiece();
   }
@@ -65,7 +54,6 @@ void TetrisEmbarcado::setRotate() {
 // Função que move a peça para a esqueda ou direita
 void TetrisEmbarcado::changePosition() {
   uint8_t flags{ events() };  // Variável que pega os eventos do teclado.
-
   if (flags == 3 || flags == 4) {
     digitalWrite(13, LOW);
     for (uint8_t i{ 0 }; i < squares; ++i) {
@@ -82,7 +70,36 @@ void TetrisEmbarcado::changePosition() {
 }
 
 // Função que checa as linhas do tabuleiro
-void TetrisEmbarcado::checkLines() {}
+void TetrisEmbarcado::checkLines() {
+  for (uint8_t y = 0; y < lines; ++y) {
+    bool lineComplete = true;
+
+    for (uint8_t x = 1; x <= cols; ++x) {
+      if (!board[x][y]) {
+        lineComplete = false;
+        break;
+      }
+    }
+
+    if (lineComplete) {
+      removeLine(y);
+      ++score;
+    }
+  }
+}
+
+// Função que remove as peças caso seja completa
+void TetrisEmbarcado::removeLine(uint8_t line) {
+  for (uint8_t y = line; y > 0; --y) {
+    for (uint8_t x = 1; x <= cols; ++x) {
+      board[x][y] = board[x][y - 1];
+    }
+  }
+
+  for (uint8_t x = 1; x <= cols; ++x) {
+    board[x][0] = false;
+  }
+}
 
 // Função que gera novas peças
 void TetrisEmbarcado::generatePiece() {
@@ -92,5 +109,9 @@ void TetrisEmbarcado::generatePiece() {
   for (uint8_t i = 0; i < squares; ++i) {
     z[i].x = (cols - 3) / 2 + forms[number][i] % 2;
     z[i].y = forms[number][i] / 2;
+  }
+  if (maxLimit()){
+  // Verifica se houve algum preenchimento completo de linhas
+    checkLines();
   }
 }

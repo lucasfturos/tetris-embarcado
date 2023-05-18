@@ -7,8 +7,8 @@ uint8_t TetrisEmbarcado::events() {
   pinMode(KEY_RESTART, INPUT);
   pinMode(KEY_LEFT, INPUT);
   pinMode(KEY_RIGHT, INPUT);
-  pinMode(KEY_DASH, INPUT_PULLUP);
-  pinMode(KEY_ROTATE, INPUT_PULLUP);
+  pinMode(KEY_DASH, INPUT);
+  pinMode(KEY_ROTATE, INPUT);
 
   uint8_t flags = 0;  // Variável que pega os eventos do teclado.
 
@@ -39,14 +39,15 @@ void TetrisEmbarcado::logicMenu() {
   uint8_t event = events();
   switch (event) {
     case 1:
-      if (score > 254) {
-        gameOver();
-      }
+      // digitalWrite(13, HIGH);
+      // startgame = true;
+      // gameover = false;
       break;
     case 2:
-      display.clearDisplay();
-      digitalWrite(13, LOW);
-      logo();
+      // digitalWrite(13, LOW);
+      // resetGame();
+      // gameover = true;
+      // startgame = false;
       break;
     case 3:
       digitalWrite(13, HIGH);
@@ -64,6 +65,12 @@ void TetrisEmbarcado::logicMenu() {
     case 6:
       rotate = true;
       break;
+  //   default:
+  //     digitalWrite(13, LOW);
+  //     logo();
+  //     startgame = false;
+  //     gameover = true;
+  //     break;
   }
 }
 

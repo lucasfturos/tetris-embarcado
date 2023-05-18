@@ -27,15 +27,17 @@ void TetrisEmbarcado::setup() {
 // os movimentos em tempo de execução. Também faz o desenho
 // da interface.
 void TetrisEmbarcado::loop() {
-  // while (!gameover) {
-  draw_game();
   logicMenu();
-  // if (!gameover) {
-  //   changePosition();
-  moveToDown();
-  resetValues();
-  setRotate();
-  //   setScore();
-  // }
-  // }
+  if (!gameover /*&& startgame*/) {
+    // Jogo em andamento
+    draw_game();
+    changePosition();
+    moveToDown();
+    setRotate();
+    resetValues();
+    setScore();
+  } else {
+    // Jogo encerrado
+    resetGame();
+  }
 }

@@ -13,10 +13,9 @@ private:
 
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255
-  uint8_t score{ 0 };  // Variável da pontuação do jogo.
-  bool rotate{
-    false
-  };                       // Variável que detecta a ação do teclado de girar a peça.
+  uint8_t score{ 0 };      // Variável da pontuação do jogo.
+  bool rotate{ false };    // Variável que detecta a ação do teclado de girar a peça.
+  bool startgame{false};          // Variável para controlar o início do jogo
   bool gameover{ false };  // Variável que controla se o jogo continua ou para.
   // float timercount;
 
@@ -44,7 +43,7 @@ private:
     |-----------------------------------------------------|
     */
 
-  uint8_t forms[shapes][squares] = {
+  const uint8_t forms[shapes][squares] = {
     { 1, 3, 5, 7 },  // I
     { 2, 4, 5, 7 },  // Z
     { 3, 5, 4, 6 },  // S
@@ -67,6 +66,7 @@ protected:
   void generatePiece();
   void gameOver();
   void checkLines();
+  void removeLine(uint8_t line);
 
   uint8_t events();
   // Interface do jogo
@@ -76,6 +76,7 @@ protected:
   void draw_game();
   void logo();
   void initBoard();
+  void resetGame();
 
 public:
   // Declaração das funções publicas.
