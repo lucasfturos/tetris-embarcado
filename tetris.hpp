@@ -9,7 +9,7 @@ private:
   // Dimenções do tabuleiro
   static constexpr uint8_t lines{ 20 }, cols{ 10 };
   // Matriz tabuleiro
-  bool board[lines + 5][cols + 1];
+  bool board[lines][cols];
 
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255

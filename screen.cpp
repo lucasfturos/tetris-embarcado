@@ -2,8 +2,8 @@
 
 // Inicializar todos os campos do tabuleiro como vazios
 void TetrisEmbarcado::initBoard() {
-  for (uint8_t i{ 0 }; i < lines + 5; ++i) {
-    for (uint8_t j{ 0 }; j < cols + 1; ++j) {
+  for (uint8_t i{ 0 }; i < lines; ++i) {
+    for (uint8_t j{ 0 }; j < cols; ++j) {
       board[i][j] = false;
     }
   }
@@ -26,18 +26,18 @@ void TetrisEmbarcado::drawGame() {
   display.clearDisplay();
   display.setRotation(3);
 
-  for (uint8_t i{ 0 }; i < lines + 5; ++i) {
-    for (uint8_t j{ 0 }; j < cols + 1; ++j) {
-      if (board[i][j]) {
-        display.drawBitmap(4 + i * 5, j * 5, bitmap_Bloco, 4, 4, 1);
-      }
-    }
-  }
-
   for (uint8_t i{ 0 }; i < squares; ++i) {
     uint8_t x = z[i].x;
     uint8_t y = z[i].y;
     display.drawBitmap(4 + x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
+  }
+
+  for (uint8_t i{ 0 }; i < lines; ++i) {
+    for (uint8_t j{ 0 }; j < cols; ++j) {
+      if (board[i][j]) {
+        display.drawBitmap(4 + i * 5, j * 5, bitmap_Bloco, 4, 4, 1);
+      }
+    }
   }
   drawUI();
 }

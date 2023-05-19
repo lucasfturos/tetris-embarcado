@@ -73,33 +73,36 @@ void TetrisEmbarcado::changePosition() {
 
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
-  for (uint8_t y{ lines + 5 }; y >= 0; ++y) {
-    bool lineComplete = true;
-
-    for (uint8_t x = 0; x < cols + 1; ++x) {
-      if (!board[x][y]) {
-        lineComplete = false;
+  bool line_cleared = false;
+  for (auto i{ lines - 2 }; i > 0; --i) {
+    bool full_line = true;
+    for (auto j{ 1 }; j < cols - 1; ++j) {
+      if (!board[i][j]) {
+        full_line = false;
         break;
       }
     }
 
-    if (lineComplete) {
-      removeLine(y);
-      ++score;
+    if (full_line) {
+      line_cleared = true;
+      removeLine(i);  // Chamada da função removeLine para remover a linha completa
     }
+  }
+  if (line_cleared) {
+    ++score;
   }
 }
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (uint8_t y{ line + 5 }; y >= 0; --y) {
-    for (uint8_t x{ 0 }; x < cols + 1; ++x) {
-      board[x][y] = board[x][y - 1];
+  for (uint8_t y = line; y > 0; --y) {
+    for (uint8_t x = 1; x < cols - 1; ++x) {
+      board[y][x] = board[y - 1][x];
     }
   }
 
-  for (uint8_t x{ 0 }; x <= cols + 1; ++x) {
-    board[x][0] = false;
+  for (uint8_t x = 1; x < cols - 1; ++x) {
+    board[0][x] = false;
   }
 }
 
