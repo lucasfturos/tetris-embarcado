@@ -21,7 +21,7 @@ void TetrisEmbarcado::moveToDown() {
   // Verifica se atingiu o limite máximo
   if (maxLimit()) {
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      board[z[i].x][z[i].y - 1] = true;
+      board[z[i].x][z[i].y] = true;
     }
 
     // Verifica se houve algum preenchimento de linhas
@@ -73,10 +73,10 @@ void TetrisEmbarcado::changePosition() {
 
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
-  for (uint8_t y = 0; y < lines + 5; ++y) {
+  for (uint8_t y{ lines + 5 }; y >= 0; ++y) {
     bool lineComplete = true;
 
-    for (uint8_t x = 1; x <= cols + 1; ++x) {
+    for (uint8_t x = 0; x < cols + 1; ++x) {
       if (!board[x][y]) {
         lineComplete = false;
         break;
@@ -92,13 +92,13 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (uint8_t y = line + 5; y > 0; --y) {
-    for (uint8_t x = 4; x <= cols + 1; ++x) {
+  for (uint8_t y{ line + 5 }; y >= 0; --y) {
+    for (uint8_t x{ 0 }; x < cols + 1; ++x) {
       board[x][y] = board[x][y - 1];
     }
   }
 
-  for (uint8_t x = 1; x <= cols; ++x) {
+  for (uint8_t x{ 0 }; x <= cols + 1; ++x) {
     board[x][0] = false;
   }
 }

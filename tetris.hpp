@@ -9,14 +9,14 @@ private:
   // Dimenções do tabuleiro
   static constexpr uint8_t lines{ 20 }, cols{ 10 };
   // Matriz tabuleiro
-  bool board[lines][cols];
+  bool board[lines + 5][cols + 1];
 
   uint8_t dirx;  // Variável que faz o movimento do jogo.
   // Limite do score é 255
-  uint8_t score{ 0 };      // Variável da pontuação do jogo.
-  bool rotate{ false };    // Variável que detecta a ação do teclado de girar a peça.
-  bool startgame{false};          // Variável para controlar o início do jogo
-  bool gameover{ false };  // Variável que controla se o jogo continua ou para.
+  uint8_t score{ 0 };       // Variável da pontuação do jogo.
+  bool rotate{ false };     // Variável que detecta a ação do teclado de girar a peça.
+  bool startgame{ false };  // Variável para controlar o início do jogo
+  bool gameover{ false };   // Variável que controla se o jogo continua ou para.
   // float timercount;
 
   // Declaração da variável do display
@@ -70,13 +70,13 @@ protected:
 
   uint8_t events();
   // Interface do jogo
-  void setScore();
-  void draw_ui();
-  void draw_gameover();
-  void draw_game();
   void logo();
+  void drawUI();
+  void setScore();
+  void drawGame();
   void initBoard();
   void resetGame();
+  void drawGameover();
 
 public:
   // Declaração das funções publicas.

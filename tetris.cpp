@@ -9,7 +9,7 @@ TetrisEmbarcado::TetrisEmbarcado() {
 // Chamada do destructor
 TetrisEmbarcado::~TetrisEmbarcado() {
   // Libera memória do tabuleiro
-  for (uint8_t i = 0; i < lines; ++i) {
+  for (uint8_t i = 0; i < lines + 5; ++i) {
     delete[] board[i];
   }
   delete[] board;
@@ -31,7 +31,7 @@ void TetrisEmbarcado::loop() {
   logicMenu();
   if (!gameover /*&& startgame*/) {
     // Jogo em andamento
-    draw_game();
+    drawGame();
     changePosition();
     moveToDown();
     setRotate();

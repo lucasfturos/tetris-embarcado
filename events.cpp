@@ -81,7 +81,7 @@ void TetrisEmbarcado::resetValues() {
 
 void TetrisEmbarcado::gameOver() {
   display.clearDisplay();
-  draw_gameover();
+  drawGameover();
   gameover = true;
   digitalWrite(13, LOW);
 }
