@@ -28,6 +28,7 @@ void TetrisEmbarcado::setup() {
 // os movimentos em tempo de execução. Também faz o desenho
 // da interface.
 void TetrisEmbarcado::loop() {
+  display.setRotation(3);
   logicMenu();
   if (!gameover /*&& startgame*/) {
     // Jogo em andamento

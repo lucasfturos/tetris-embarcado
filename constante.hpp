@@ -25,6 +25,5 @@ const uint8_t shapes{ 7 };
 // Interface gráfica do jogo
 #include "ui/logo_game.hpp"
 #include "ui/game_over.hpp"
-#include "ui/borda_tabuleiro.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco[] PROGMEM = { 248, 248, 248, 248, 248 };
