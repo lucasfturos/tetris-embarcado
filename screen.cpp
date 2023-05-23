@@ -9,16 +9,16 @@ void TetrisEmbarcado::initBoard() {
   }
 }
 
-// Função que desenha a interface do jogo
+// Função que desenha o tabuleiro do jogo
 void TetrisEmbarcado::drawUI() {
   uint8_t x0{ 1 }, y0{ 1 }, x1{ display.width() - 2 }, y1{ display.height() - 2 };
   display.setCursor(3, 0);
   display.setTextColor(1);
   display.setTextSize(1);
   display.println("Score:" + String(score));
-  // Desenha as linhas horizontais
+  // Desenha a linha horizontal no final da tela
   display.drawLine(x0, y1, x1, y1, 1);
-  // Desenha as linhas verticais
+  // Desenha as linhas verticais da tela
   display.drawLine(x0, y0, x0, y1, 1);
   display.drawLine(x1, y0, x1, y1, 1);
 }
@@ -33,9 +33,9 @@ void TetrisEmbarcado::drawGame() {
     uint8_t x = z[i].x;
     uint8_t y = z[i].y;
     display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
-    if (board[x][y]) {
-      display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
-    }
+    // if (board[x][y]) {
+    //   display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
+    // }
   }
   display.display();
 }
@@ -61,8 +61,8 @@ void TetrisEmbarcado::resetGame() {
   logo();       // Exibe a tela inicial
   delay(2000);  // Aguarda 2 segundos
 
-  score = 0;         // Reinicia a pontuação
-  gameover = false;  // Reinicia o estado do jogo
+  score = 0;        // Reinicia a pontuação
+  gameover = true;  // Reinicia o estado do jogo
 
   initBoard();
   spawPiece();

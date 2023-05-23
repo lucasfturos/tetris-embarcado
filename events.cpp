@@ -4,7 +4,6 @@
 uint8_t TetrisEmbarcado::events() {
   // Definição do modo dos botões
   pinMode(KEY_START, INPUT);
-  pinMode(KEY_RESTART, INPUT);
   pinMode(KEY_LEFT, INPUT);
   pinMode(KEY_RIGHT, INPUT);
   pinMode(KEY_DASH, INPUT);
@@ -16,20 +15,17 @@ uint8_t TetrisEmbarcado::events() {
   if (digitalRead(KEY_START) == HIGH) {
     return flags = 1;
   }
-  if (digitalRead(KEY_RESTART) == HIGH) {
+  if (digitalRead(KEY_LEFT) == HIGH) {
     return flags = 2;
   }
-  if (digitalRead(KEY_LEFT) == HIGH) {
+  if (digitalRead(KEY_RIGHT) == HIGH) {
     return flags = 3;
   }
-  if (digitalRead(KEY_RIGHT) == HIGH) {
+  if (digitalRead(KEY_DASH) == HIGH) {
     return flags = 4;
   }
-  if (digitalRead(KEY_DASH) == HIGH) {
-    return flags = 5;
-  }
   if (digitalRead(KEY_ROTATE) == HIGH) {
-    return flags = 6;
+    return flags = 5;
   }
   return flags;
 }
@@ -39,37 +35,24 @@ void TetrisEmbarcado::logicMenu() {
   uint8_t event = events();
   switch (event) {
     case 1:
-      // digitalWrite(13, HIGH);
-      // startgame = true;
-      // gameover = false;
+      digitalWrite(13, HIGH);
+      gameover = true;
       break;
     case 2:
-      // digitalWrite(13, LOW);
-      // resetGame();
-      // gameover = true;
-      // startgame = false;
-      break;
-    case 3:
       digitalWrite(13, HIGH);
       --dirx;
       break;
-    case 4:
+    case 3:
       digitalWrite(13, HIGH);
       ++dirx;
       break;
-    case 5:
+    case 4:
       digitalWrite(13, HIGH);
       break;
-    case 6:
+    case 5:
       digitalWrite(13, HIGH);
       rotate = true;
       break;
-      //   default:
-      //     digitalWrite(13, LOW);
-      //     logo();
-      //     startgame = false;
-      //     gameover = true;
-      //     break;
   }
 }
 
@@ -82,11 +65,12 @@ void TetrisEmbarcado::resetValues() {
 void TetrisEmbarcado::gameOver() {
   display.clearDisplay();
   drawGameover();
+  delay(2000);  // Aguarda 2 segundos
   gameover = true;
   digitalWrite(13, LOW);
 }
 
 // Função que calcula os pontos do jogador.
 void TetrisEmbarcado::setScore() {
-  // score++;
+  score++;
 }

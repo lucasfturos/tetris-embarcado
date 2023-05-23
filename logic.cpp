@@ -11,7 +11,7 @@ void TetrisEmbarcado::moveToDown() {
     delay(50);
 
     // Ao precionar o botão dash a peça move mais rápido
-    if (flags == 5) {
+    if (flags == 4) {
       digitalWrite(13, LOW);
       ++z[i].y;
       delay(1);
@@ -21,11 +21,11 @@ void TetrisEmbarcado::moveToDown() {
   // Verifica se atingiu o limite máximo
   if (maxLimit()) {
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      board[z[i].x][z[i].y] = true;
+      board[z[i].x - 1][z[i].y] = true;
     }
 
     // Verifica se houve algum preenchimento de linhas
-    checkLines();
+    //checkLines();
 
     // Gera uma nova peça
     spawPiece();
@@ -56,7 +56,7 @@ void TetrisEmbarcado::setRotate() {
 // Função que move a peça para a esqueda ou direita
 void TetrisEmbarcado::changePosition() {
   uint8_t flags{ events() };  // Variável que pega os eventos do teclado.
-  if (flags == 3 || flags == 4) {
+  if (flags == 2 || flags == 3) {
     digitalWrite(13, LOW);
     for (uint8_t i{ 0 }; i < squares; ++i) {
       k[i] = z[i];
@@ -74,7 +74,7 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  for (auto i{ lines - 2 }; i > 0; --i) {
+  for (auto i{ 0 }; 0 < lines - 2; ++i) {
     bool full_line = true;
     for (auto j{ 1 }; j < cols - 1; ++j) {
       if (!board[i][j]) {
@@ -85,9 +85,10 @@ void TetrisEmbarcado::checkLines() {
 
     if (full_line) {
       line_cleared = true;
-      removeLine(i);  // Chamada da função removeLine para remover a linha completa
+      removeLine(i);
     }
   }
+
   if (line_cleared) {
     ++score;
   }
@@ -95,14 +96,13 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (uint8_t y = line; y > 0; --y) {
-    for (uint8_t x = 1; x < cols - 1; ++x) {
-      board[y][x] = board[y - 1][x];
+  for (auto k{ 0 }; 0 < line - 2; ++k) {
+    for (auto j{ 1 }; j < cols - 1; ++j) {
+      board[k][j] = board[k - 1][j];
     }
   }
-
-  for (uint8_t x = 1; x < cols - 1; ++x) {
-    board[0][x] = false;
+  for (auto j{ 1 }; j < cols - 1; ++j) {
+    board[lines + 5][j] = false;
   }
 }
 

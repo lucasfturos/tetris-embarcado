@@ -29,17 +29,18 @@ void TetrisEmbarcado::setup() {
 // da interface.
 void TetrisEmbarcado::loop() {
   display.setRotation(3);
-  logicMenu();
-  if (!gameover /*&& startgame*/) {
-    // Jogo em andamento
-    drawGame();
-    changePosition();
-    moveToDown();
-    setRotate();
-    resetValues();
-    setScore();
-  } else {
-    // Jogo encerrado
-    resetGame();
-  }
+  logo();
+  // logicMenu();
+  // drawGame();
+  // if (!gameover) {
+  //   // Jogo em andamento
+  //   changePosition();
+  //   moveToDown();
+  //   setRotate();
+  //   resetValues();
+  //   setScore();
+  // } else {
+  //   // Jogo encerrado
+  //   gameOver();
+  // }
 }

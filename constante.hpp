@@ -12,11 +12,10 @@ const uint8_t OLED_RESET{ -1 };
 
 // Botões
 const uint8_t KEY_START{ 2 };
-const uint8_t KEY_RESTART{ 3 };
-const uint8_t KEY_LEFT{ 4 };
-const uint8_t KEY_RIGHT{ 5 };
-const uint8_t KEY_DASH{ 6 };
-const uint8_t KEY_ROTATE{ 7 };
+const uint8_t KEY_RIGHT{ 3 };
+const uint8_t KEY_DASH{ 4 };
+const uint8_t KEY_LEFT{ 5 };
+const uint8_t KEY_ROTATE{ 6 };
 
 // Setup das peças
 const uint8_t squares{ 4 };
