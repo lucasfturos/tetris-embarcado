@@ -15,6 +15,7 @@ private:
   // Limite do score é 255
   uint8_t score{ 0 };      // Variável da pontuação do jogo.
   bool rotate{ false };    // Variável que detecta a ação do teclado de girar a peça.
+  bool start{ false };     // Variável que controla o inicio do jogo
   bool gameover{ false };  // Variável que controla se o jogo continua ou para.
   uint8_t flags = 0;       // Variável que pega os eventos do teclado.
 

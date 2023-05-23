@@ -35,8 +35,10 @@ void TetrisEmbarcado::logicMenu() {
   uint8_t event = events();
   switch (event) {
     case 1:
+      display.clearDisplay();
       digitalWrite(13, HIGH);
-      gameover = true;
+      gameover = false;
+      start = true;
       break;
     case 2:
       digitalWrite(13, HIGH);
@@ -67,10 +69,7 @@ void TetrisEmbarcado::gameOver() {
   drawGameover();
   delay(2000);  // Aguarda 2 segundos
   gameover = true;
+  start = false;
+  display.clearDisplay();
   digitalWrite(13, LOW);
-}
-
-// Função que calcula os pontos do jogador.
-void TetrisEmbarcado::setScore() {
-  score++;
 }

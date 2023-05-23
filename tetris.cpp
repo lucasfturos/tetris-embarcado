@@ -22,25 +22,27 @@ void TetrisEmbarcado::setup() {
   display = Adafruit_SSD1306(width, height, &Wire, OLED_RESET);
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
+  display.setRotation(3);
+  logo();
 }
 
 // Função loop do jogo, pega as ações do jogador e atualiza
 // os movimentos em tempo de execução. Também faz o desenho
 // da interface.
 void TetrisEmbarcado::loop() {
-  display.setRotation(3);
-  logo();
-  // logicMenu();
-  // drawGame();
-  // if (!gameover) {
-  //   // Jogo em andamento
-  //   changePosition();
-  //   moveToDown();
-  //   setRotate();
-  //   resetValues();
-  //   setScore();
-  // } else {
-  //   // Jogo encerrado
-  //   gameOver();
-  // }
+  logicMenu();
+  if (start) {
+    // Jogo em andamento
+    drawGame();
+    if (!gameover) {
+      changePosition();
+      moveToDown();
+      setRotate();
+      resetValues();
+      score++;
+    } else {
+      // Jogo encerrado
+      gameOver();
+    }
+  }
 }
