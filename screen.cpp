@@ -28,25 +28,44 @@ void TetrisEmbarcado::drawGame() {
   // Inicializar a matriz board
   display.clearDisplay();
   drawUI();
-
+  for (uint8_t i{ 0 }; i < lines - 1; ++i) {
+    for (uint8_t j{ 0 }; j < cols - 1; ++j) {
+      if (board[i][j]) {
+        display.drawBitmap(i * 5, j * 5, bitmap_Bloco, 4, 4, 1);
+      }
+    }
+  }
   for (uint8_t i{ 0 }; i < squares; ++i) {
     uint8_t x = z[i].x;
     uint8_t y = z[i].y;
     display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
-    // if (board[x][y]) {
-    //   display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
-    // }
   }
   display.display();
 }
 
 void TetrisEmbarcado::drawGameover() {
-  display.clearDisplay();
+  uint8_t x0{ 2 }, y0{ 2 };
+  uint8_t x1{ display.width() - 3 }, y1{ display.height() - 3 };
+  display.setCursor(5, 56);
+  display.setTextColor(1);
+  display.setTextSize(1);
+  display.println("Game Over");
   display.setCursor(5, 67);
   display.setTextColor(1);
   display.setTextSize(1);
   display.println("Score:" + String(score));
-  display.drawBitmap(0, 0, bitmap_GameOver, height, width, 1);
+  // Desenha a linha horizontal da tela
+  for (int i = 0; i < 1; ++i) {
+    display.drawLine(x0, y1 + i, x1, y1 + i, 1);
+    display.drawLine(x0, y0 - i, x1, y0 - i, 1);
+  }
+
+  // Desenha as linhas verticais da tela
+  for (int i = 0; i < 1; ++i) {
+    display.drawLine(x0 - i, y0, x0 - i, y1, 1);
+    display.drawLine(x1 + i, y0, x1 + i, y1, 1);
+  }
+
   display.display();
 }
 

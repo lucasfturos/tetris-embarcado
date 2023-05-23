@@ -39,7 +39,6 @@ void TetrisEmbarcado::loop() {
       moveToDown();
       setRotate();
       resetValues();
-      score++;
     } else {
       // Jogo encerrado
       gameOver();

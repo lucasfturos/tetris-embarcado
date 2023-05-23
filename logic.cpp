@@ -21,11 +21,11 @@ void TetrisEmbarcado::moveToDown() {
   // Verifica se atingiu o limite máximo
   if (maxLimit()) {
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      board[z[i].x - 1][z[i].y] = true;
+      board[z[i].x - 2][z[i].y] = true;
     }
 
     // Verifica se houve algum preenchimento de linhas
-    //checkLines();
+    checkLines();
 
     // Gera uma nova peça
     spawPiece();
@@ -74,42 +74,45 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  for (auto i{ 0 }; 0 < lines - 2; ++i) {
+  for (int8_t i{ lines - 2 }; i >= 1; --i) {
     bool full_line = true;
-    for (auto j{ 1 }; j < cols - 1; ++j) {
+    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
       if (!board[i][j]) {
         full_line = false;
         break;
       }
-    }
 
-    if (full_line) {
-      line_cleared = true;
-      removeLine(i);
+      if (full_line) {
+        line_cleared = true;
+        removeLine(i);
+      }
     }
   }
 
   if (line_cleared) {
-    ++score;
+    score += 10;
+    if (score >= 40) {
+      gameOver();
+    }
   }
 }
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (auto k{ 0 }; 0 < line - 2; ++k) {
-    for (auto j{ 1 }; j < cols - 1; ++j) {
+  for (int8_t k{ line }; k >= 1; --k) {
+    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
       board[k][j] = board[k - 1][j];
     }
   }
-  for (auto j{ 1 }; j < cols - 1; ++j) {
-    board[lines + 5][j] = false;
+  for (uint8_t j = 1; j < cols - 1; ++j) {
+    board[0][j] = false;
   }
 }
 
 // Função que gera novas peças
 void TetrisEmbarcado::spawPiece() {
   uint8_t number{ random(shapes) };
-  const uint8_t startX{ (cols - 3) / 2 };
+  const uint8_t startX{ (cols - 2) / 2 };
   const uint8_t startY{ 0 };
 
   // Defini as posições da nova peça no topo do tabuleiro
