@@ -70,6 +70,5 @@ void TetrisEmbarcado::gameOver() {
   delay(2000);  // Aguarda 2 segundos
   gameover = true;
   start = false;
-  display.clearDisplay();
   digitalWrite(13, LOW);
 }

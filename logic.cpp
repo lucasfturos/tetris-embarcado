@@ -74,9 +74,9 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  for (int8_t i{ lines - 2 }; i >= 1; --i) {
+  for (int8_t i{ lines - 1 }; i >= 1; --i) {
     bool full_line = true;
-    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
+    for (uint8_t j{ cols - 1 }; j >= 1; --j) {
       if (!board[i][j]) {
         full_line = false;
         break;
@@ -91,7 +91,7 @@ void TetrisEmbarcado::checkLines() {
 
   if (line_cleared) {
     score += 10;
-    if (score >= 40) {
+    if (score >= 990) {
       gameOver();
     }
   }
@@ -99,12 +99,12 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t k{ line }; k >= 1; --k) {
-    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
-      board[k][j] = board[k - 1][j];
+  for (int8_t i{ line }; i > 0; --i) {
+    for (uint8_t j{ 0 }; j < cols; ++j) {
+      board[i][j] = board[i - 1][j];
     }
   }
-  for (uint8_t j = 1; j < cols - 1; ++j) {
+  for (uint8_t j{ 0 }; j < cols; ++j) {
     board[0][j] = false;
   }
 }
@@ -113,10 +113,10 @@ void TetrisEmbarcado::removeLine(uint8_t line) {
 void TetrisEmbarcado::spawPiece() {
   uint8_t number{ random(shapes) };
   const uint8_t startX{ (cols - 2) / 2 };
-  const uint8_t startY{ 0 };
+  const uint8_t startY{ 2 };
 
   // Defini as posições da nova peça no topo do tabuleiro
-  for (uint8_t i = 0; i < squares; ++i) {
+  for (uint8_t i{ 0 }; i < squares; ++i) {
     z[i].x = startX + forms[number][i] % 2;
     z[i].y = startY + forms[number][i] / 2;
   }

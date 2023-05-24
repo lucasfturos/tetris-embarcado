@@ -9,9 +9,10 @@ TetrisEmbarcado::TetrisEmbarcado() {
 // Chamada do destructor
 TetrisEmbarcado::~TetrisEmbarcado() {
   // Libera memória do tabuleiro
-  for (uint8_t i = 0; i < lines + 5; ++i) {
+  for (uint8_t i = 0; i < lines; ++i) {
     delete[] board[i];
   }
+  
   delete[] board;
 }
 
@@ -30,6 +31,7 @@ void TetrisEmbarcado::setup() {
 // os movimentos em tempo de execução. Também faz o desenho
 // da interface.
 void TetrisEmbarcado::loop() {
+  display.clearDisplay();
   logicMenu();
   if (start) {
     // Jogo em andamento
