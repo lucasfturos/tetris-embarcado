@@ -7,12 +7,12 @@
 #include <Adafruit_SSD1306.h>
 
 // Dimenções do tabuleiro
-const uint8_t lines{ 20 };
-const uint8_t cols{ 10 };
+const int lines{ 20 };
+const int cols{ 10 };
 
 // Display
 const uint8_t width{ 128 }, height{ 64 };
-const uint8_t OLED_RESET{ -1 };
+const uint8_t OLED_RESET{ 4 };
 
 // Botões
 const uint8_t KEY_START{ 2 };
@@ -54,3 +54,4 @@ const uint8_t forms[shapes][squares] = {
 #include "ui/logo_game.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco[] PROGMEM = { 248, 248, 248, 248, 248 };
+const unsigned char bloco_Vazio[] PROGMEM = { 0, 0, 0, 0, 0 };

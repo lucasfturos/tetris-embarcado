@@ -1,34 +1,38 @@
+#include "Arduino.h"
 #include "tetris.hpp"
 
 void TetrisEmbarcado::moveToDown() {
+  uint16_t timer{ 0 };
   // Variável que pega os eventos do teclado.
   uint8_t flags{ events() };
-
-  // Movimento normal das peças
-  for (uint8_t i{ 0 }; i < squares; ++i) {
-    //  k[i] = z[i];
-    ++z[i].y;
-    delay(50);
-
-    // Ao precionar o botão dash a peça move mais rápido
-    if (flags == 4) {
-      digitalWrite(13, LOW);
-      ++z[i].y;
-      delay(1);
-    }
-  }
-
-  // Verifica se atingiu o limite máximo
-  if (maxLimit()) {
+  if (timer < millis()) {
+    // Movimento normal das peças
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      board[z[i].x - 2][z[i].y] = true;
+      //++z[i].y;
+      delay(50);
+
+      // Ao precionar o botão dash a peça move mais rápido
+      if (flags == 4) {
+        digitalWrite(13, LOW);
+        ++z[i].y;
+        delay(1);
+      }
     }
 
-    // Verifica se houve algum preenchimento de linhas
-    checkLines();
+    // Verifica se atingiu o limite máximo
+    if (maxLimit()) {
+      for (uint8_t i{ 0 }; i < squares; ++i) {
+        board[z[i].x - 1][z[i].y] = true;
+      }
 
-    // Gera uma nova peça
-    spawPiece();
+      // Verifica se houve algum preenchimento de linhas
+      checkLines();
+
+      // Gera uma nova peça
+      spawPiece();
+      checkGameOver();
+    }
+    timer = 0;
   }
 }
 
@@ -74,19 +78,21 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  for (int8_t i{ lines - 1 }; i >= 1; --i) {
+  uint8_t count{ 0 };
+  for (int8_t i{ (lines+6)-1 }; i > 0; --i) {
     bool full_line = true;
-    for (uint8_t j{ cols - 1 }; j >= 1; --j) {
+    for (uint8_t j{ 1 }; j < (cols+3)-1; ++j) {
       if (!board[i][j]) {
         full_line = false;
+        ++count;
         break;
       }
-
-      if (full_line) {
-        line_cleared = true;
-        removeLine(i);
-      }
     }
+    if (full_line) {
+      line_cleared = true;
+      removeLine(count);
+    }
+    count = 0;
   }
 
   if (line_cleared) {
@@ -99,13 +105,24 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t i{ line }; i > 0; --i) {
-    for (uint8_t j{ 0 }; j < cols; ++j) {
+  for (int8_t i{ line+5 }; i > 0; --i) {
+    for (uint8_t j{ 1 }; j < (cols+3)-1; ++j) {
       board[i][j] = board[i - 1][j];
     }
   }
-  for (uint8_t j{ 0 }; j < cols; ++j) {
+  for (uint8_t j{ 0 }; j < (cols+3) - 1; ++j) {
     board[0][j] = false;
+  }
+}
+
+// Função que checa se as peças tocaram no topo do tabulei
+// e retorna fim do jogo
+void TetrisEmbarcado::checkGameOver() {
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    if (z[i].x < 0) {
+      gameover = true;
+      return;
+    }
   }
 }
 

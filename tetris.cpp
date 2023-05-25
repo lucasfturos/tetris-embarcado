@@ -12,7 +12,7 @@ TetrisEmbarcado::~TetrisEmbarcado() {
   for (uint8_t i = 0; i < lines; ++i) {
     delete[] board[i];
   }
-  
+
   delete[] board;
 }
 
@@ -25,17 +25,16 @@ void TetrisEmbarcado::setup() {
   display.clearDisplay();
   display.setRotation(3);
   logo();
+  initBoard();
 }
 
 // Função loop do jogo, pega as ações do jogador e atualiza
 // os movimentos em tempo de execução. Também faz o desenho
 // da interface.
 void TetrisEmbarcado::loop() {
-  display.clearDisplay();
   logicMenu();
   if (start) {
     // Jogo em andamento
-    drawGame();
     if (!gameover) {
       changePosition();
       moveToDown();
@@ -45,5 +44,6 @@ void TetrisEmbarcado::loop() {
       // Jogo encerrado
       gameOver();
     }
+    drawGame();
   }
 }

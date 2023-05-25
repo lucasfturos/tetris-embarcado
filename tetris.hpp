@@ -39,6 +39,7 @@ protected:
   void spawPiece();
   void gameOver();
   void checkLines();
+  void checkGameOver();
   void removeLine(uint8_t line);
 
   uint8_t events();

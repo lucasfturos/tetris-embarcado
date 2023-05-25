@@ -34,15 +34,18 @@ void TetrisEmbarcado::drawGame() {
   // Inicializar a matriz board
   display.clearDisplay();
   drawUI();
-  for (uint8_t i{ 0 }; i < lines + 5; ++i) {
-    for (uint8_t j{ 0 }; j < cols + 2; ++j) {
-      if (board[i][j]) {
+  for (uint8_t i{ 0 }; i < lines+5; ++i) {
+    for (uint8_t j{ 0 }; j < cols+2; ++j) {
+      if (!board[i][j]) {
         uint8_t x = i;
         uint8_t y = j;
-        x = (cols + 2) - x;       // Inverte a coordenada x
-        y = (lines + 7) - y - 1;  // Inverte a coordenada y
-
-        display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
+        
+        display.drawBitmap(y * 5,x * 5, bitmap_Bloco, 4, 4, 1);
+      } else {
+        uint8_t x = i;
+        uint8_t y = j;
+        
+        display.drawBitmap(y * 5, 2+x * 5, bloco_Vazio, 4, 4, 1);
       }
     }
   }
@@ -108,11 +111,9 @@ void TetrisEmbarcado::resetGame() {
 // Função que define os limites do tabuleiro
 bool TetrisEmbarcado::maxLimit() {
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    if (z[i].x < 1 || z[i].y < 0 || z[i].x >= cols + 2 || z[i].y >= lines + 5 || board[z[i].x][z[i].y]) {
+    if (z[i].x < 1 || z[i].y < 2 || z[i].x >= (cols+3) -1 || z[i].y >= (lines+6) -1|| board[z[i].x][z[i].y]) {
       return true;
-    } else if (z[i].x < 0) {
-      gameOver();
-    }
+    } 
   }
   return false;
 }
