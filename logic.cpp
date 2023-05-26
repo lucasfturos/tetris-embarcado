@@ -2,38 +2,38 @@
 #include "tetris.hpp"
 
 void TetrisEmbarcado::moveToDown() {
-  uint16_t timer{ 0 };
+  // uint16_t timer{ 0 };
   // Variável que pega os eventos do teclado.
   uint8_t flags{ events() };
-  if (timer < millis()) {
-    // Movimento normal das peças
-    for (uint8_t i{ 0 }; i < squares; ++i) {
+  // if (timer < millis()) {
+  // Movimento normal das peças
+  for (uint8_t i{ 0 }; i < squares; ++i) {
+    ++z[i].y;
+    delay(50);
+
+    // Ao precionar o botão dash a peça move mais rápido
+    if (flags == 4) {
+      digitalWrite(13, LOW);
       ++z[i].y;
-      delay(50);
-
-      // Ao precionar o botão dash a peça move mais rápido
-      if (flags == 4) {
-        digitalWrite(13, LOW);
-        ++z[i].y;
-        delay(1);
-      }
+      delay(1);
     }
-
-    // Verifica se atingiu o limite máximo
-    if (maxLimit()) {
-      for (uint8_t i{ 0 }; i < squares; ++i) {
-        board[z[i].y-1][z[i].x] = true;
-      }
-
-      // Verifica se houve algum preenchimento de linhas
-      checkLines();
-
-      // Gera uma nova peça
-      spawPiece();
-      checkGameOver();
-    }
-    timer = 0;
   }
+
+  // Verifica se atingiu o limite máximo
+  if (maxLimit()) {
+    for (uint8_t i{ 0 }; i < squares; ++i) {
+      board[z[i].y - 1][z[i].x] = true;
+    }
+
+    // Verifica se houve algum preenchimento de linhas
+    checkLines();
+
+    // Gera uma nova peça
+    spawPiece();
+    checkGameOver();
+  }
+  //   timer = 0;
+  // }
 }
 
 // Função que gira a peça
@@ -79,7 +79,7 @@ void TetrisEmbarcado::changePosition() {
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
   uint8_t count{ 0 };
-  for (int8_t i{ lines }; i > 1; --i) {
+  for (int8_t i{ lines - 1 }; i >= 1; --i) {
     bool full_line = true;
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       if (!board[i][j]) {
@@ -105,7 +105,7 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t i{ line }; i > 0; --i) {
+  for (int8_t i{ line }; i >= 1; --i) {
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       board[i][j] = board[i - 1][j];
     }
