@@ -54,4 +54,3 @@ const uint8_t forms[shapes][squares] = {
 #include "ui/logo_game.hpp"
 // 'Bloco', 5x5px
 const unsigned char bitmap_Bloco[] PROGMEM = { 248, 248, 248, 248, 248 };
-const unsigned char bloco_Vazio[] PROGMEM = { 0, 0, 0, 0, 0 };

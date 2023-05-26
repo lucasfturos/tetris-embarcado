@@ -22,7 +22,7 @@ void TetrisEmbarcado::moveToDown() {
     // Verifica se atingiu o limite máximo
     if (maxLimit()) {
       for (uint8_t i{ 0 }; i < squares; ++i) {
-        board[z[i].y][z[i].x] = true;
+        board[z[i].y-1][z[i].x] = true;
       }
 
       // Verifica se houve algum preenchimento de linhas
@@ -79,7 +79,7 @@ void TetrisEmbarcado::changePosition() {
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
   uint8_t count{ 0 };
-  for (int8_t i{ lines }; i > 0; --i) {
+  for (int8_t i{ lines }; i > 1; --i) {
     bool full_line = true;
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       if (!board[i][j]) {
@@ -119,7 +119,7 @@ void TetrisEmbarcado::removeLine(uint8_t line) {
 // e retorna fim do jogo
 void TetrisEmbarcado::checkGameOver() {
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    if (z[i].x < 0) {
+    if (z[i].x < 1) {
       gameover = true;
       return;
     }
