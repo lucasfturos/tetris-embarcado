@@ -8,7 +8,7 @@ void TetrisEmbarcado::moveToDown() {
   if (timer < millis()) {
     // Movimento normal das peças
     for (uint8_t i{ 0 }; i < squares; ++i) {
-      //++z[i].y;
+      ++z[i].y;
       delay(50);
 
       // Ao precionar o botão dash a peça move mais rápido
@@ -22,7 +22,7 @@ void TetrisEmbarcado::moveToDown() {
     // Verifica se atingiu o limite máximo
     if (maxLimit()) {
       for (uint8_t i{ 0 }; i < squares; ++i) {
-        board[z[i].x - 1][z[i].y] = true;
+        board[z[i].y][z[i].x] = true;
       }
 
       // Verifica se houve algum preenchimento de linhas
@@ -79,9 +79,9 @@ void TetrisEmbarcado::changePosition() {
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
   uint8_t count{ 0 };
-  for (int8_t i{ (lines+6)-1 }; i > 0; --i) {
+  for (int8_t i{ lines }; i > 0; --i) {
     bool full_line = true;
-    for (uint8_t j{ 1 }; j < (cols+3)-1; ++j) {
+    for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       if (!board[i][j]) {
         full_line = false;
         ++count;
@@ -105,12 +105,12 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t i{ line+5 }; i > 0; --i) {
-    for (uint8_t j{ 1 }; j < (cols+3)-1; ++j) {
+  for (int8_t i{ line }; i > 0; --i) {
+    for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       board[i][j] = board[i - 1][j];
     }
   }
-  for (uint8_t j{ 0 }; j < (cols+3) - 1; ++j) {
+  for (uint8_t j{ 0 }; j < cols + 2; ++j) {
     board[0][j] = false;
   }
 }

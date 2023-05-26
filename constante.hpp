@@ -7,7 +7,7 @@
 #include <Adafruit_SSD1306.h>
 
 // Dimenções do tabuleiro
-const int lines{ 20 };
+const int lines{ 25 };
 const int cols{ 10 };
 
 // Display
