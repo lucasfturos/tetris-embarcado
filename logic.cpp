@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "tetris.hpp"
 
 void TetrisEmbarcado::moveToDown() {
@@ -78,21 +77,18 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  uint8_t count{ 0 };
-  for (int8_t i{ lines - 1 }; i >= 1; --i) {
+  for (int8_t i{ lines - 1 }; i > 0; --i) {
     bool full_line = true;
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       if (!board[i][j]) {
         full_line = false;
-        ++count;
         break;
       }
     }
     if (full_line) {
       line_cleared = true;
-      removeLine(count);
+      removeLine(i);
     }
-    count = 0;
   }
 
   if (line_cleared) {
@@ -105,7 +101,7 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t i{ line }; i >= 1; --i) {
+  for (int8_t i{ line }; i > 0; --i) {
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       board[i][j] = board[i - 1][j];
     }

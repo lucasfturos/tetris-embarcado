@@ -34,21 +34,21 @@ void TetrisEmbarcado::drawGame() {
   // Inicializar a matriz board
   display.clearDisplay();
   drawUI();
-  for (uint8_t i{ lines - 1 }; i >= 1; --i) {
+  for (uint8_t i{ lines - 1 }; i > 1; --i) {
     for (uint8_t j{ 1 }; j < cols + 2; ++j) {
       if (board[i][j]) {
-        uint8_t x = j;
-        uint8_t y = i;
+        uint8_t x = j*5;
+        uint8_t y = i*5;
 
-        display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
+        display.drawBitmap(x, y, bitmap_Bloco, 4, 4, 1);
       }
     }
   }
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    uint8_t x = z[i].x;
-    uint8_t y = z[i].y;
+    uint8_t x = z[i].x*5;
+    uint8_t y = z[i].y*5;
 
-    display.drawBitmap(x * 5, y * 5, bitmap_Bloco, 4, 4, 1);
+    display.drawBitmap(x, y, bitmap_Bloco, 4, 4, 1);
   }
   display.display();
 }
@@ -106,7 +106,7 @@ void TetrisEmbarcado::resetGame() {
 // Função que define os limites do tabuleiro
 bool TetrisEmbarcado::maxLimit() {
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    if (z[i].x < 1 || z[i].y < 1 || z[i].x >= cols + 2 || z[i].y >= lines || board[z[i].y - 1][z[i].x]) {
+    if (z[i].x < 1 || z[i].y < 1 || z[i].x >= cols + 2 || z[i].y >= lines || board[z[i].y][z[i].x]) {
       return true;
     }
   }
