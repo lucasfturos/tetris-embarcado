@@ -30,31 +30,31 @@ protected:
   // Declaração das funções protegidas.
 
   // Eventos do jogo
-  void logicMenu();
-  void moveToDown();
-  void setRotate();
-  void resetValues();
-  void changePosition();
-  bool maxLimit();
-  void spawPiece();
   void gameOver();
+  void logicMenu();
+  void setRotate();
+  void initBoard();
+  void spawPiece();
   void checkLines();
+  void moveToDown();
+  void resetValues();
   void checkGameOver();
+  void changePosition();
   void removeLine(uint8_t line);
 
+  bool maxLimit();
   uint8_t events();
+
   // Interface do jogo
   void logo();
   void drawUI();
   void setScore();
   void drawGame();
-  void initBoard();
   void resetGame();
   void drawGameover();
 
 public:
   // Declaração das funções publicas.
-  TetrisEmbarcado();
   ~TetrisEmbarcado();
 
   void setup();

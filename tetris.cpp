@@ -1,17 +1,12 @@
 #include "tetris.hpp"
 
-// Chamada do constructor da classe
-TetrisEmbarcado::TetrisEmbarcado() {
-  spawPiece();
-}
-
 // Chamada do destructor
 TetrisEmbarcado::~TetrisEmbarcado() {
   // Libera memória do tabuleiro
-   for (uint8_t i = 0; i < lines; ++i) {
-      delete[] board[i];
-    }
-    delete[] board;
+  for (uint8_t i = 0; i < lines; ++i) {
+    delete[] board[i];
+  }
+  delete[] board;
 }
 
 // Função principal onde define o tamanho da tela e velocidade
@@ -24,6 +19,7 @@ void TetrisEmbarcado::setup() {
   display.setRotation(3);
   logo();
   initBoard();
+  spawPiece();
 }
 
 // Função loop do jogo, pega as ações do jogador e atualiza

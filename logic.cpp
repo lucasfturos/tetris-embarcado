@@ -1,10 +1,8 @@
 #include "tetris.hpp"
 
 void TetrisEmbarcado::moveToDown() {
-  // uint16_t timer{ 0 };
   // Variável que pega os eventos do teclado.
   uint8_t flags{ events() };
-  // if (timer < millis()) {
   // Movimento normal das peças
   for (uint8_t i{ 0 }; i < squares; ++i) {
     ++z[i].y;
@@ -29,10 +27,9 @@ void TetrisEmbarcado::moveToDown() {
 
     // Gera uma nova peça
     spawPiece();
+    // Checa colisão no topo do tabuleiro
     checkGameOver();
   }
-  //   timer = 0;
-  // }
 }
 
 // Função que gira a peça
@@ -77,9 +74,9 @@ void TetrisEmbarcado::changePosition() {
 // Função que checa as linhas do tabuleiro
 void TetrisEmbarcado::checkLines() {
   bool line_cleared = false;
-  for (int8_t i{ lines - 1 }; i > 0; --i) {
+  for (int8_t i{ lines - 2 }; i >= 1; --i) {
     bool full_line = true;
-    for (uint8_t j{ 1 }; j < cols + 2; ++j) {
+    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
       if (!board[i][j]) {
         full_line = false;
         break;
@@ -101,13 +98,13 @@ void TetrisEmbarcado::checkLines() {
 
 // Função que remove as peças caso seja completa
 void TetrisEmbarcado::removeLine(uint8_t line) {
-  for (int8_t i{ line }; i > 0; --i) {
-    for (uint8_t j{ 1 }; j < cols + 2; ++j) {
+  for (int8_t i{ line }; i >= 2; --i) {
+    for (uint8_t j{ 1 }; j < cols - 1; ++j) {
       board[i][j] = board[i - 1][j];
     }
   }
-  for (uint8_t j{ 0 }; j < cols + 2; ++j) {
-    board[0][j] = false;
+  for (uint8_t j{ 1 }; j < cols - 1; ++j) {
+    board[1][j] = false;
   }
 }
 
@@ -115,7 +112,7 @@ void TetrisEmbarcado::removeLine(uint8_t line) {
 // e retorna fim do jogo
 void TetrisEmbarcado::checkGameOver() {
   for (uint8_t i{ 0 }; i < squares; ++i) {
-    if (z[i].x < 1) {
+    if (z[i].y < 1|| board[z[i].y - 1][z[i].x]) {
       gameover = true;
       return;
     }
