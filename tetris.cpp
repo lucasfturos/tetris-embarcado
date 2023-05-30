@@ -29,15 +29,15 @@ void TetrisEmbarcado::loop() {
   logicMenu();
   if (start) {
     // Jogo em andamento
+        drawGame();
     if (!gameover) {
       changePosition();
       moveToDown();
       setRotate();
       resetValues();
-    } else {
-      // Jogo encerrado
-      gameOver();
-    }
-    drawGame();
+    }else {
+    // Jogo encerrado
+    gameOver();
   }
+  } 
 }
